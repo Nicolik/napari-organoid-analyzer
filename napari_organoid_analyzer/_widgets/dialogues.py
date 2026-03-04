@@ -204,6 +204,16 @@ class ExportDialog(QDialog):
         browse_button.clicked.connect(self._browse_folder)
         path_layout.addWidget(browse_button)
         layout.addLayout(path_layout)
+
+        # Buttons
+        button_layout = QHBoxLayout()
+        export_button = QPushButton("Export")
+        export_button.clicked.connect(self._validate_and_accept)
+        cancel_button = QPushButton("Cancel")
+        cancel_button.clicked.connect(self.reject)
+        button_layout.addWidget(export_button)
+        button_layout.addWidget(cancel_button)
+        layout.addLayout(button_layout)
         
         # What to export
         warning_label = QLabel("WARNING: It is recommended to export full instance masks only for small subset of detections, as they take up a lot of space. For exporting them as polygons use layer data export option.")
@@ -263,16 +273,6 @@ class ExportDialog(QDialog):
         self.feature_selection_widget.setVisible(True)
         bottom_layout.addWidget(self.feature_selection_widget)
         layout.addLayout(bottom_layout)
-        
-        # Buttons
-        button_layout = QHBoxLayout()
-        export_button = QPushButton("Export")
-        export_button.clicked.connect(self._validate_and_accept)
-        cancel_button = QPushButton("Cancel")
-        cancel_button.clicked.connect(self.reject)
-        button_layout.addWidget(export_button)
-        button_layout.addWidget(cancel_button)
-        layout.addLayout(button_layout)
         
         self.setLayout(layout)
     
